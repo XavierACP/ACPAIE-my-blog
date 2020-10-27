@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+    <h1>Index Blog ({{ posts|length}})</h1>
+
+    {% if messages %}
+        {% for message in messages%}
+            <div data-role="panel" style="width : 300px; margin:0 auto">{{ message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% for post in posts %}
+        <div>
+            <h2><a  href="{% url 'blog:show' post.id %}">#{{ post.id }} - {{ post.title|upper }}</a></h2>
+            <p>{{ post.body|truncatewords:3}}</p>
+            <p><a href="{% url 'blog:show' post.id %}">Lire la suite</a></p>
+        </div>
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
+    {% empty %}
+        <p>Sorry, no post available</p>
+    {% endfor %}
+    <hr>
+    
+    <h2><a href="{% url 'blog:post_new' %}"><button class="button primary shadowed">Ajouter</button></a></h2>
+    <hr>
+    <h2><a href="{% url 'home' %}">👈 Homepage</a></h2>
+{% endblock %}

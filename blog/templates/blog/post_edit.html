@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Nouveau post{{ post.title }}{% endblock %}
+{% block content %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button primary shadowed">Save</button>
+    </form>
+        
+    <hr>
+    <p><a href="{% url 'blog:index' %}">👈All Posts</a></p>
+{% endblock %}
+

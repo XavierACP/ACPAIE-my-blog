@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Blog {{ post.title }}{% endblock %}
+{% block content %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p}}
+            <h1>Post #{{post.id}}</h1>
+            <input type="text" value="{{ post.title }}">
+            <textarea>{{ post.body }}</textarea>
+    <button type="submit" class="button primary shadowed">Save</button>
+    </form>
+ 
+    <hr>
+
+    <hr>
+   <h2><a href="{% url 'blog:post_supp' post.id %}"><button class="button primary shadowed">Delete</button></a></h2>
+    <hr>
+    <h2><a href="{% url 'blog:post_upd' post.id %}"><button class="button primary shadowed">Update</button></a></h2>
+    <hr>
+    <p><a href="{% url 'blog:index' %}">👈 All Posts</a></p>
+{% endblock %}
